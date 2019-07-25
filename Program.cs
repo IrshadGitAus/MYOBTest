@@ -9,7 +9,7 @@ namespace PaySlipGenerator
             Console.WriteLine("Start payslip engine...");
 
             var e = new PaySlipEngine();
-            e.WritePaySlipInfoToCSV();
+            e.GeneratePaySlip();
         }
     }
 }
