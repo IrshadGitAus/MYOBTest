@@ -7,36 +7,13 @@ namespace PaySlipGenerator
     public class PaySlipInfo
     {
 
-        public void FillPaySlipInfo(Employee e, EmployeeSalary es)
+        public void GeneratePaySlipInfo(Employee e, EmployeeSalary es)
         {
             es.payPeroid = GetPayPeriod(es.paymentDate);
             es.grossIncome = GetGrossIncome(es.annualSalary);
             es.incomeTax = GetTaxOnIncome(es.annualSalary);
             es.netIncome = GetNetIncome(es.grossIncome, es.incomeTax);
             es.super = GetSuper(es.grossIncome, es.superRate);
-
-            var csv = new StringBuilder();
-            var first = "Name";
-            var second = "Pay Period";
-            var third = "Gross Income";
-            var fourth = "Income Tax";
-            var fifth = "Net Income";
-            var sixth = "Super";
-            var newLine = "";
-
-            //name, pay period,gross income, income tax, net income and super.
-            newLine = string.Format("{0},{1},{2},{3},{4},{5}", first, second, third, fourth, fifth, sixth);
-            csv.AppendLine(newLine);
-
-
-            first = e.firstName + " " + e.lastName;
-            second = es.payPeroid;
-            third = (es.grossIncome).ToString();
-            fourth = (es.incomeTax).ToString();
-            fifth = (es.netIncome).ToString();
-            sixth = (es.super).ToString();
-            newLine = string.Format("{0},{1},{2},{3},{4},{5}", first, second, third, fourth, fifth, sixth);
-            csv.AppendLine(newLine);
         }
 
         public string GetPayPeriod(string paymentStartDate)

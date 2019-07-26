@@ -7,7 +7,7 @@ namespace PaySlipGenerator
 {
     public class PaySlipInfoWrite
     {
-        public void WriteToCSV(Employee e, EmployeeSalary es)
+        public void WritePaySlipInfo(string strCsvFileName,Employee e, EmployeeSalary es)
         {
             var csv = new StringBuilder();
             var first = "Name";
@@ -32,7 +32,9 @@ namespace PaySlipGenerator
             newLine = string.Format("{0},{1},{2},{3},{4},{5}", first, second, third, fourth, fifth, sixth);
             csv.AppendLine(newLine);
 
-            File.WriteAllText("employeepayslip.csv", csv.ToString());
+            File.WriteAllText(strCsvFileName, csv.ToString());
         }
+
+        
     }
 }

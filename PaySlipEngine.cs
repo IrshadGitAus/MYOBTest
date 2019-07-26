@@ -32,19 +32,13 @@ namespace PaySlipGenerator
         public void GeneratePaySlip()
         {
             string employeeJson = EmployeeSource.GetEmployeeFromSource();
+
             var employee = EmployeeSerializer.GetEmployeeFromJsonString(employeeJson);
             var employeeSalary = EmployeeSalarySerializer.GetEmployeeSalaryFromJsonString(employeeJson);
 
-            EmployeePaySlipInfo.FillPaySlipInfo(employee, employeeSalary);
-            EmployeePaySlipInfoWrite.WriteToCSV(employee, employeeSalary);
+            EmployeePaySlipInfo.GeneratePaySlipInfo(employee, employeeSalary);
+            EmployeePaySlipInfoWrite.WritePaySlipInfo("employeepayslip.csv",employee, employeeSalary);
 
         }
-        
-
-
-
     }
-
-
-
 }
