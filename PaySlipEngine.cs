@@ -7,7 +7,12 @@ namespace PaySlipGenerator
 {
     public class PaySlipEngine
     {
-        public   ConsoleLogger Logger { get; set; }
+
+        public IPaySlipContext Context { get; set; } = new DefaultPaySlipContext();
+
+        /*
+
+        public ConsoleLogger Logger { get; set; }
 
         public FileEmployeeSource EmployeeSource { get; set; }
 
@@ -28,17 +33,21 @@ namespace PaySlipGenerator
             EmployeePaySlipInfo = new PaySlipInfo();
             EmployeePaySlipInfoWrite = new PaySlipInfoWrite();
         }
+        */
 
         public void GeneratePaySlip()
         {
-            string employeeJson = EmployeeSource.GetEmployeeFromSource();
+            Context.Log("START");
 
-            var employee = EmployeeSerializer.GetEmployeeFromJsonString(employeeJson);
-            var employeeSalary = EmployeeSalarySerializer.GetEmployeeSalaryFromJsonString(employeeJson);
+            string employeeJson = Context.LoadEmployeeFromFile();
 
-            EmployeePaySlipInfo.GeneratePaySlipInfo(employee, employeeSalary);
-            EmployeePaySlipInfoWrite.WritePaySlipInfo("employeepayslip.csv",employee, employeeSalary);
+            var employee = Context.GetEmployeeFromJsonString(employeeJson);
+            var employeeSalary = Context.GetEmployeeSalaryFromJsonString(employeeJson);
 
+            Context.GeneratePaySlipInfo(employee, employeeSalary);
+            Context.WritePaySlipInfo("employeepayslip.csv",employee, employeeSalary);
+
+            Context.Log("END");
         }
     }
 }
