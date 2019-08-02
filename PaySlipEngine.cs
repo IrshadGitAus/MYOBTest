@@ -10,6 +10,8 @@ namespace PaySlipGenerator
 
         public IPaySlipContext Context { get; set; } = new DefaultPaySlipContext();
 
+        public ILogger Logger = new ConsoleLogger();
+
         /*
 
         public ConsoleLogger Logger { get; set; }
@@ -37,7 +39,7 @@ namespace PaySlipGenerator
 
         public void GeneratePaySlip()
         {
-            Context.Log("START");
+            Logger.Log("START");
 
             string employeeJson = Context.LoadEmployeeFromFile();
 
@@ -47,7 +49,7 @@ namespace PaySlipGenerator
             Context.GeneratePaySlipInfo(employee, employeeSalary);
             Context.WritePaySlipInfo("employeepayslip.csv",employee, employeeSalary);
 
-            Context.Log("END");
+            Logger.Log("END");
         }
     }
 }

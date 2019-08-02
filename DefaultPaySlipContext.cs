@@ -6,21 +6,7 @@ namespace PaySlipGenerator
 {
     public class DefaultPaySlipContext : IPaySlipContext
     {
-        //public ConsoleLogger Logger => new ConsoleLogger();
-        public ConsoleLogger Logger
-        {
-            get
-            {
-                return new ConsoleLogger();
-            }
-        }
-
         public PaySlipEngine Engine { get; set; }
-
-        public void Log(string message)
-        {
-            new ConsoleLogger().Log(message);
-        }
 
         public string LoadEmployeeFromFile()
         {
