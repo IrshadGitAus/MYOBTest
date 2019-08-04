@@ -8,12 +8,4 @@ namespace PaySlipGenerator
     {
         void Log(string message);
     }
-
-    public class ConsoleLogger : ILogger
-    {
-        public void Log(string strMessage)
-        {
-            Console.WriteLine(strMessage);
-        }
-    }
 }

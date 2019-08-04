@@ -4,16 +4,36 @@ using System.Text;
 
 namespace PaySlipGenerator
 {
-    public class PaySlipInfo
+    public interface IPaySlipInfo
+    {
+        string GeneratePaySlipInfo(Employee e, EmployeeSalary es);
+    }
+
+    public class PaySlipInfo : IPaySlipInfo
     {
 
-        public void GeneratePaySlipInfo(Employee e, EmployeeSalary es)
+        public string GeneratePaySlipInfo(Employee e, EmployeeSalary es)
         {
+            var first = "Name";
+            var second = "Pay Period";
+            var third = "Gross Income";
+            var fourth = "Income Tax";
+            var fifth = "Net Income";
+            var sixth = "Super";
+
             es.payPeroid = GetPayPeriod(es.paymentDate);
             es.grossIncome = GetGrossIncome(es.annualSalary);
             es.incomeTax = GetTaxOnIncome(es.annualSalary);
             es.netIncome = GetNetIncome(es.grossIncome, es.incomeTax);
             es.super = GetSuper(es.grossIncome, es.superRate);
+
+            first = e.firstName + " " + e.lastName;
+            second = es.payPeroid;
+            third = (es.grossIncome).ToString();
+            fourth = (es.incomeTax).ToString();
+            fifth = (es.netIncome).ToString();
+            sixth = (es.super).ToString();
+            return string.Format("{0},{1},{2},{3},{4},{5}", first, second, third, fourth, fifth, sixth);
         }
 
         public string GetPayPeriod(string paymentStartDate)

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 
 namespace PaySlipGenerator
 {
-    public class FileEmployeeSalarySerializer
+    public class FileEmployeeSalarySerializer : IEmployeeSalarySerializer
     {
         public EmployeeSalary GetEmployeeSalaryFromJsonString(string strJsonString)
         {

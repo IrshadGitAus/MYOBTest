@@ -5,7 +5,7 @@ using System.IO;
 
 namespace PaySlipGenerator
 {
-    public class FileEmployeeSource
+    public class FileEmployeeSource : IEmployeeSource
     {
         public string GetEmployeeFromSource()
         {

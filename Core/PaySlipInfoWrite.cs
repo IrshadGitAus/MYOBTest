@@ -5,7 +5,12 @@ using System.IO;
 
 namespace PaySlipGenerator
 {
-    public class PaySlipInfoWrite
+    public interface IPaySlipInfoWrite
+    {
+        void WritePaySlipInfo(string strCsvFileName, Employee e, EmployeeSalary es);
+    }
+
+    public class PaySlipInfoWrite : IPaySlipInfoWrite
     {
         public void WritePaySlipInfo(string strCsvFileName,Employee e, EmployeeSalary es)
         {
